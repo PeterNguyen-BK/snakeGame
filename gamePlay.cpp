@@ -1,17 +1,8 @@
 #include "gamePlay.h"
 using namespace std;
-#define pointSnake 254 
-#define MAX 100
-#define initLength 3
-#define UP 1
-#define DOWN 2
-#define LEFT 3
-#define RIGHT 4
 
-struct point{
-    int x;
-    int y;
-};
+
+
 point snake[MAX];
 
 void gotoXY(short int x, short int y)
@@ -23,22 +14,28 @@ void gotoXY(short int x, short int y)
   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
 }
 
-void displaySnake(){
+void displaySnake(point endPoint){
     for (int i=0;i<initLength;i++){
         gotoXY(snake[i].x, snake[i].y);
         cout<< (char)pointSnake;
     }
+    gotoXY(endPoint.x, endPoint.y);
+    cout<<" ";
 }
 
 void initSnake(){
     snake[0].x=5;
     snake[1].x=6;
     snake[2].x=7;
-    snake[0].y=snake[1].y=snake[2].y=1;
-    displaySnake();
+    snake[0].y=snake[1].y=snake[2].y=5;
+    for (int i=0;i<initLength;i++){
+        gotoXY(snake[i].x, snake[i].y);
+        cout<< (char)pointSnake;
+    }
 }
 
 void moveSnake(){
+    point endPoint=snake[initLength-1];
     int direction=DOWN;
     while(1){
         for (int i=initLength-1;i>=1;i--){
@@ -64,14 +61,15 @@ void moveSnake(){
         default:
             break;
         }
-       
-        system("cls");
-        displaySnake();
+        
+        initFrame();
+        displaySnake(endPoint);
         if(kbhit()){
         direction=inputKeyboard();
         }
-        Sleep(500);
+        Sleep(1000);
     }
+    
 }
 
 int inputKeyboard(){
@@ -91,5 +89,25 @@ int inputKeyboard(){
         direction=DOWN;
     }
     return direction;
+}
+
+void initFrame(){
+    for (int x=LEFT_WALL;x<=RIGHT_WALL;x++){    //Initialize above wall
+        gotoXY(x,ABOVE_WALL);
+        cout<<(char)220;
+    }
+    for (int y=ABOVE_WALL+1;y<=BOTTOM_WALL;y++){  //Initialize left wall
+        gotoXY(LEFT_WALL,y);
+        cout<<(char)221;
+    }
+    
+    for (int y=ABOVE_WALL+1;y<=BOTTOM_WALL;y++){  //Initialize left wall
+        gotoXY(RIGHT_WALL,y);
+        cout<<(char)221;
+    }
+     for (int x=LEFT_WALL;x<=RIGHT_WALL;x++){    //Initialize bottom wall
+        gotoXY(x,BOTTOM_WALL);
+        cout<<(char)223;
+    }
 }
 
