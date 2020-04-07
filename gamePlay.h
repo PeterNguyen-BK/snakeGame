@@ -1,11 +1,14 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
 using namespace std;
 
-void gotoXY(int x, int y);
+void gotoXY(short int x, short int y);
 void initSnake();
+void displaySnake();
 void initFrame();
-void moveSnake();
+void inputKeyboard();
+void moveSnake(int direction);
 void eatSnake();
 void initFood();
 

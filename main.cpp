@@ -12,6 +12,7 @@ int main(){
     if (option==1) {
         system("cls");
         initSnake();
+        moveSnake(2);
     }
     else if (option==2) {
         cout<<"Enter level you want (easy,medium,advance): ";
