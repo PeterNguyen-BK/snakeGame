@@ -38,8 +38,8 @@ void initSnake(){
     displaySnake();
 }
 
-void moveSnake(int direction){
-    
+void moveSnake(){
+    int direction=DOWN;
     while(1){
         for (int i=initLength-1;i>=1;i--){
             snake[i]=snake[i-1];       
@@ -64,9 +64,32 @@ void moveSnake(int direction){
         default:
             break;
         }
-        
+       
         system("cls");
         displaySnake();
-        Sleep(1000);
+        if(kbhit()){
+        direction=inputKeyboard();
+        }
+        Sleep(500);
     }
 }
+
+int inputKeyboard(){
+    int direction;
+    char keyPress=getch();
+    int asciiValue=keyPress;
+    if (asciiValue==119){
+        direction=UP;
+    }
+    else if (asciiValue==97){
+        direction=LEFT;
+    }
+    else if (asciiValue==100){
+        direction=RIGHT;
+    }
+    else if (asciiValue==115){
+        direction=DOWN;
+    }
+    return direction;
+}
+
