@@ -3,7 +3,7 @@ using namespace std;
 
 
 
-point snake[MAX];
+int initLength = 3;
 
 void gotoXY(short int x, short int y)
 {
@@ -28,16 +28,10 @@ void initSnake(){
     snake[1].x=6;
     snake[2].x=7;
     snake[0].y=snake[1].y=snake[2].y=5;
-    for (int i=0;i<initLength;i++){
-        gotoXY(snake[i].x, snake[i].y);
-        cout<< (char)pointSnake;
-    }
 }
 
-void moveSnake(){
+point moveSnake(int direction){
     point endPoint=snake[initLength-1];
-    int direction=DOWN;
-    while(1){
         for (int i=initLength-1;i>=1;i--){
             snake[i]=snake[i-1];       
         }
@@ -61,15 +55,7 @@ void moveSnake(){
         default:
             break;
         }
-        
-        initFrame();
-        displaySnake(endPoint);
-        if(kbhit()){
-        direction=inputKeyboard();
-        }
-        Sleep(1000);
-    }
-    
+    return endPoint;
 }
 
 int inputKeyboard(){
@@ -109,5 +95,34 @@ void initFrame(){
         gotoXY(x,BOTTOM_WALL);
         cout<<(char)223;
     }
+}
+
+bool checkImpact(){
+    if (snake[0].x==LEFT_WALL || snake[0].x==RIGHT_WALL){
+        return false;
+    }
+    else if (snake[0].y==ABOVE_WALL || snake[0].y==BOTTOM_WALL){
+        return false;
+    }
+    else return true;
+}
+
+point initFood(){
+    point food;
+    srand(time(NULL));
+    food.x=rand() % (RIGHT_WALL-LEFT_WALL-2) + (LEFT_WALL+1);
+    food.y=rand() % (BOTTOM_WALL-ABOVE_WALL-2) + (ABOVE_WALL+1);
+    gotoXY(food.x, food.y);
+    cout<<"#";
+    return food;
+}
+
+bool snakeEat(){
+    point food=initFood(); 
+    if (snake[0].x==food.x && snake[0].y==food.y){
+        initLength++;
+        return true;
+    }
+    return false;
 }
 

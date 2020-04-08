@@ -2,10 +2,10 @@
 #include <windows.h>
 #include <conio.h>
 #include <string>
+#include <time.h>
 using namespace std;
 #define pointSnake 254 
 #define MAX 100
-#define initLength 3
 #define UP 1
 #define DOWN 2
 #define LEFT 3
@@ -15,18 +15,22 @@ using namespace std;
 #define LEFT_WALL 2
 #define RIGHT_WALL 60 
 
+
+extern int initLength;
 struct point{
     int x;
     int y;
 };
+point snake[MAX];
 
 void gotoXY(short int x, short int y);
 void initSnake();
 void displaySnake(point endPoint);
 void initFrame();
 int inputKeyboard();
-void moveSnake();
-void eatSnake();
-void initFood();
+point moveSnake(int direction);
+bool snakeEat();
+point initFood();
+bool checkImpact();
 
 
