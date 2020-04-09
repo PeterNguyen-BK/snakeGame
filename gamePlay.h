@@ -6,6 +6,7 @@
 using namespace std;
 #define pointSnake 254 
 #define MAX 100
+#define initLength 3
 #define UP 1
 #define DOWN 2
 #define LEFT 3
@@ -21,7 +22,7 @@ struct point{
     int x;
     int y;
 };
-extern point snake[MAX];
+
 
 void gotoXY(short int x, short int y);
 void initSnake();
@@ -29,8 +30,9 @@ void displaySnake(point endPoint);
 void initFrame();
 int inputKeyboard();
 point moveSnake(int direction);
-bool snakeEat();
+bool snakeEat(point food);
 point initFood();
 bool checkImpact();
+void displayFood();
 
 

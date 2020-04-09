@@ -10,23 +10,22 @@ int main(){
     point endPoint;
     initGame();
     cout<<"Please enter your choice: ";
-    cin>>option;
+    cin>>option;    
     if (option==1) {
         system("cls");
-        initSnake();
         initFrame();
-        initFood();
-        while (1){
-            if (snakeEat()){
-                initFood();
-            }
+        initSnake();
+        point food;
+        food = initFood();
+        while(1){
+            if (snakeEat(food)){food=initFood();}
+            if (checkImpact()){system("cls"); cout<<"GAME OVER!"; break;}
             endPoint=moveSnake(direction);
+            displaySnake(endPoint);
             if(kbhit()){
                 direction=inputKeyboard();
             }
-            displaySnake(endPoint);
-            if (!checkImpact()){system("cls"); cout<<"GAME OVER"; break;}
-            Sleep(200);
+            Sleep(300);
         }    
     }
     else if (option==2) {

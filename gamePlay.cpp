@@ -1,7 +1,7 @@
 #include "gamePlay.h"
 using namespace std;
 
-
+point snake[MAX];
 
 void gotoXY(short int x, short int y)
 {
@@ -30,6 +30,7 @@ void initSnake(){
 
 point moveSnake(int direction){
     point endPoint=snake[initLength-1];
+   
         for (int i=initLength-1;i>=1;i--){
             snake[i]=snake[i-1];       
         }
@@ -54,6 +55,10 @@ point moveSnake(int direction){
             break;
         }
     return endPoint;
+        
+        
+    
+    
 }
 
 int inputKeyboard(){
@@ -97,12 +102,12 @@ void initFrame(){
 
 bool checkImpact(){
     if (snake[0].x==LEFT_WALL || snake[0].x==RIGHT_WALL){
-        return false;
+        return true;
     }
     else if (snake[0].y==ABOVE_WALL || snake[0].y==BOTTOM_WALL){
-        return false;
+        return true;
     }
-    else return true;
+    else return false;
 }
 
 point initFood(){
@@ -115,13 +120,10 @@ point initFood(){
     return food;
 }
 
-bool snakeEat(){
-    point food=initFood(); 
+bool snakeEat(point food){
     if (snake[0].x==food.x && snake[0].y==food.y){
-        gotoXY(food.x, food.y);
-        cout<<" ";
-        return true;
+        return true;   
     }
-    return false;
+    else return false;
 }
 
