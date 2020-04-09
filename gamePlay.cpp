@@ -3,8 +3,6 @@ using namespace std;
 
 
 
-int initLength = 3;
-
 void gotoXY(short int x, short int y)
 {
   static HANDLE h = NULL;  
@@ -120,7 +118,8 @@ point initFood(){
 bool snakeEat(){
     point food=initFood(); 
     if (snake[0].x==food.x && snake[0].y==food.y){
-        initLength++;
+        gotoXY(food.x, food.y);
+        cout<<" ";
         return true;
     }
     return false;

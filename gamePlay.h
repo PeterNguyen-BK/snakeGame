@@ -16,12 +16,12 @@ using namespace std;
 #define RIGHT_WALL 60 
 
 
-extern int initLength;
+#define initLength 3
 struct point{
     int x;
     int y;
 };
-point snake[MAX];
+extern point snake[MAX];
 
 void gotoXY(short int x, short int y);
 void initSnake();
