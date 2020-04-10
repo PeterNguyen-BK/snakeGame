@@ -2,6 +2,7 @@
 using namespace std;
 
 point snake[MAX];
+int initLength=3;
 
 void gotoXY(short int x, short int y)
 {
@@ -54,11 +55,7 @@ point moveSnake(int direction){
         default:
             break;
         }
-    return endPoint;
-        
-        
-    
-    
+    return endPoint; 
 }
 
 int inputKeyboard(){
@@ -102,9 +99,11 @@ void initFrame(){
 
 bool checkImpact(){
     if (snake[0].x==LEFT_WALL || snake[0].x==RIGHT_WALL){
+        initLength=3;
         return true;
     }
     else if (snake[0].y==ABOVE_WALL || snake[0].y==BOTTOM_WALL){
+        initLength=3;
         return true;
     }
     else return false;
@@ -122,6 +121,7 @@ point initFood(){
 
 bool snakeEat(point food){
     if (snake[0].x==food.x && snake[0].y==food.y){
+        initLength++;
         return true;   
     }
     else return false;

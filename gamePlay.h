@@ -6,7 +6,6 @@
 using namespace std;
 #define pointSnake 254 
 #define MAX 100
-#define initLength 3
 #define UP 1
 #define DOWN 2
 #define LEFT 3
@@ -17,7 +16,7 @@ using namespace std;
 #define RIGHT_WALL 60 
 
 
-#define initLength 3
+
 struct point{
     int x;
     int y;
